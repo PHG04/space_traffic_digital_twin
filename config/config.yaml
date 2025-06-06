@@ -1,0 +1,102 @@
+# Space Traffic Management Digital Twin Configuration
+
+# Simulation Settings
+simulation:
+  update_rate_hz: 1
+  max_satellites: 1000
+  conjunction_threshold_km: 5.0
+  propagation_method: "keplerian_j2"
+  time_step_seconds: 1.0
+  simulation_duration_hours: 24
+
+# Risk Assessment
+risk_assessment:
+  high_risk_threshold: 1e-4  # Pc threshold for high-risk classification
+  medium_risk_threshold: 1e-6
+  low_risk_threshold: 1e-8
+  maneuver_cost_factor: 0.1
+  satellite_replacement_cost: 100000000  # USD
+  fuel_cost_per_kg: 10000  # USD per kg of propellant
+
+# Performance Settings
+performance:
+  spatial_index_type: "kdtree"
+  cache_size_mb: 512
+  parallel_processing: true
+  num_worker_threads: 4
+  batch_size: 100
+
+# Database Configuration
+database:
+  postgresql:
+    host: "localhost"
+    port: 5432
+    database: "stm_digital_twin"
+    username: "stm_user"
+    password: "stm_password"
+  
+  redis:
+    host: "localhost"
+    port: 6379
+    database: 0
+    password: null
+
+# Dashboard Settings
+dashboard:
+  host: "0.0.0.0"
+  port: 8050
+  debug: true
+  auto_reload: true
+  websocket_timeout: 30
+  max_connections: 100
+
+# Visualization Settings
+visualization:
+  max_satellites_3d: 1000
+  orbit_history_hours: 24
+  update_interval_ms: 1000
+  conjunction_highlight_duration: 300  # seconds
+
+# Orbital Mechanics
+orbital_mechanics:
+  earth_radius_km: 6378.137
+  gravitational_parameter: 398600.4418  # km³/s²
+  j2_coefficient: 1.08262668e-3
+  atmospheric_drag: false
+  solar_radiation_pressure: false
+
+# Sensor Modeling
+sensor_modeling:
+  position_noise_std_km: 0.1
+  velocity_noise_std_km_s: 0.001
+  sensor_drift_rate: 1e-6  # per hour
+  measurement_frequency_hz: 0.1
+
+# Maneuver Planning
+maneuver_planning:
+  max_delta_v_ms: 100  # m/s maximum maneuver capability
+  min_lead_time_hours: 2
+  maneuver_duration_seconds: 300
+  fuel_margin_factor: 1.2
+
+# Alerting
+alerting:
+  email_notifications: false
+  sms_notifications: false
+  webhook_url: null
+  alert_retention_days: 30
+
+# Logging
+logging:
+  level: "INFO"
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+  file: "logs/stm_system.log"
+  max_file_size_mb: 50
+  backup_count: 5
+
+# Testing
+testing:
+  unit_test_data_path: "tests/data"
+  integration_test_timeout: 300
+  performance_test_duration: 60
+  accuracy_test_tolerance: 0.01 

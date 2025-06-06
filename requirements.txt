@@ -1,0 +1,47 @@
+# Core Scientific Computing
+numpy
+scipy
+pandas
+
+# Orbital Mechanics and Astronomy
+poliastro
+astropy
+
+# Visualization and Dashboard
+plotly
+dash
+dash-bootstrap-components
+
+# Web Framework and API
+flask
+flask-socketio
+gunicorn
+requests
+
+# Database and Caching
+psycopg2-binary
+redis
+redis-py-cluster
+
+# Data Processing and Analysis
+scikit-learn
+numba
+joblib
+
+# Configuration and Environment
+python-dotenv
+pyyaml
+
+# Development and Testing
+pytest
+pytest-cov
+black
+flake8
+mypy
+
+# Documentation
+sphinx
+sphinx-rtd-theme
+
+# Deployment
+docker 
