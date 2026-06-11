@@ -1,0 +1,11 @@
+{
+  "fetched_at": "2026-06-11T20:46:27Z",
+  "source": "https://celestrak.org/NORAD/elements/gp.php",
+  "note": "Bundled snapshot used as offline fallback when the live proxy is unreachable.",
+  "groups": {
+    "stations": 25,
+    "starlink": 10545,
+    "oneweb": 651,
+    "active-leo": 14873
+  }
+}

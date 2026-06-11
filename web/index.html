@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Space Traffic Digital Twin — browser demo</title>
+  <meta name="description" content="A digital twin of low Earth orbit in your browser: real CelesTrak GP data propagated with SGP4 — mirror the sky, predict close approaches, rehearse avoidance manoeuvres." />
+  <meta name="theme-color" content="#0A0E14" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./css/digital-twin.css">
+  <style>
+    /* Minimal token set — the demo stylesheet carries fallbacks for the rest. */
+    :root {
+      --bg: #0A0E14; --bg-1: #121721; --bg-2: #1A2030; --bg-3: #242C40;
+      --line: #222A3A; --line-strong: #323B50;
+      --ink: #E8EDF5; --ink-2: #B9C2D1; --ink-3: #7F8AA0; --ink-4: #55607A;
+      --accent: #8FD5C0; --accent-hi: #B6E5D6; --accent-lo: #5FA890;
+      --accent-wash: rgba(143, 213, 192, 0.10);
+      --font-sans: "Space Grotesk", -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+      --font-mono: "JetBrains Mono", "SF Mono", Menlo, Consolas, monospace;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0; background: var(--bg); color: var(--ink);
+      font-family: var(--font-sans); -webkit-font-smoothing: antialiased;
+    }
+    .page { max-width: 1180px; margin: 0 auto; padding: 28px 20px 60px; }
+    .head { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; flex-wrap: wrap; margin-bottom: 6px; }
+    .head h1 { font-size: 1.25rem; font-weight: 600; margin: 0; }
+    .head a { color: var(--accent); text-decoration: none; font-size: 0.85rem; }
+    .head a:hover { text-decoration: underline; }
+    .sub { margin: 0 0 10px; color: var(--ink-3); font-size: 0.88rem; line-height: 1.5; max-width: 70ch; }
+  </style>
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+      "satellite": "https://cdn.jsdelivr.net/npm/satellite.js@5.0.0/+esm"
+    }
+  }
+  </script>
+</head>
+<body>
+  <div class="page">
+    <div class="head">
+      <h1>Space Traffic Digital Twin <span style="color:var(--ink-4);font-weight:400">· browser demo</span></h1>
+      <span>
+        <a href="https://github.com/PHG04/space_traffic_digital_twin">↗ repository</a>
+        &nbsp;·&nbsp;
+        <a href="https://pierregathy.com/projects/space-traffic-digital-twin.html">↗ project write-up</a>
+      </span>
+    </div>
+    <p class="sub">
+      Real orbits from the CelesTrak GP catalog, propagated with SGP4 in your browser. This standalone
+      page uses the bundled TLE snapshot in <code>web/data/</code>; the hosted version at pierregathy.com
+      fetches live elements through a caching proxy. Serve this folder over HTTP
+      (e.g. <code>python -m http.server</code> in <code>web/</code>) — module imports don't work from file://.
+    </p>
+
+    <section id="twin-demo"
+             data-twin
+             data-twin-data-base="./data/"
+             data-twin-api-base=""
+             aria-label="Interactive digital twin of low Earth orbit"></section>
+  </div>
+
+  <script type="module">
+    import { startDigitalTwin } from "./js/digital-twin.js";
+    startDigitalTwin(document.getElementById("twin-demo"));
+  </script>
+</body>
+</html>

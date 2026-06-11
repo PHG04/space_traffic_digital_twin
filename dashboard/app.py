@@ -25,8 +25,9 @@ import time
 from concurrent.futures import ThreadPoolExecutor, as_completed
 sys.path.append(os.path.join(os.path.dirname(__file__), '..', 'src'))
 
-# N2YO API Configuration
-N2YO_API_KEY = "BRR9P5-3PS8QC-DAYEP6-5HU4"
+# N2YO API Configuration — set N2YO_API_KEY in your environment (see .env.example).
+# Without a key the dashboard falls back to simulated satellite positions.
+N2YO_API_KEY = os.environ.get("N2YO_API_KEY", "")
 N2YO_BASE_URL = "https://api.n2yo.com/rest/v1/satellite"
 
 # Popular satellites to track (NORAD IDs)
