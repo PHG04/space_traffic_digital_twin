@@ -180,8 +180,8 @@ async function loadCatalog(sourceKey, { apiBase, dataBase }) {
   for (const p of tryPaths) {
     try {
       const [g, st] = await Promise.all([
-        fetchText(p.group, p.live ? 10000 : 20000),
-        fetchText(p.stations, p.live ? 10000 : 20000).catch(() => null),
+        fetchText(p.group, p.live ? 15000 : 20000),
+        fetchText(p.stations, p.live ? 15000 : 20000).catch(() => null),
       ]);
       const main = parseTLE(g.text);
       if (main.length < 10) throw new Error("catalog too small — bad payload?");

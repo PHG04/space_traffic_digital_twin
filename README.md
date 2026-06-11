@@ -40,11 +40,11 @@ python -m http.server 8000   # any static server works; file:// won't (ES module
 # open http://localhost:8000
 ```
 
-The standalone page uses the bundled TLE snapshot in `web/data/` (stamped in
-`tle-manifest.json`). The hosted version fetches live elements through a small
-same-origin caching proxy (`api/tle.js` in the website repo) because CelesTrak
-doesn't serve CORS headers; the page falls back to the snapshot and labels the
-data age either way.
+Both the hosted and the standalone page fetch live elements through a small
+caching proxy (`api/tle.js` in the website repo, CORS-open) because CelesTrak
+doesn't serve CORS headers itself. If the proxy is unreachable, the page falls
+back to the bundled snapshot in `web/data/` (stamped in `tle-manifest.json`) —
+and the corner badge labels the data age either way.
 
 ### Mirroring contract
 

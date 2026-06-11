@@ -53,16 +53,16 @@
       </span>
     </div>
     <p class="sub">
-      Real orbits from the CelesTrak GP catalog, propagated with SGP4 in your browser. This standalone
-      page uses the bundled TLE snapshot in <code>web/data/</code>; the hosted version at pierregathy.com
-      fetches live elements through a caching proxy. Serve this folder over HTTP
+      Real orbits from the CelesTrak GP catalog, propagated with SGP4 in your browser — fetched live
+      through the caching proxy at pierregathy.com (CORS-open), with the bundled snapshot in
+      <code>web/data/</code> as offline fallback. Serve this folder over HTTP
       (e.g. <code>python -m http.server</code> in <code>web/</code>) — module imports don't work from file://.
     </p>
 
     <section id="twin-demo"
              data-twin
              data-twin-data-base="./data/"
-             data-twin-api-base=""
+             data-twin-api-base="https://pierregathy.com/api"
              aria-label="Interactive digital twin of low Earth orbit"></section>
   </div>
 
