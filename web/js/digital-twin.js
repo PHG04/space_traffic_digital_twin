@@ -1443,8 +1443,25 @@ export function startDigitalTwin(root, opts = {}) {
     S.twinTimeMs = ev.tcaMs - 50000;
     S.twinSpeed = 25;
     S.watching = { untilMs: ev.tcaMs + 25000 };
-    // Chase the pair midpoint while the pass plays out.
+
+    // Orient camera outward from Earth at the conjunction point before the
+    // chase starts — without this the camera may end up inside the Earth mesh
+    // when the satellite pair is on the back side of the globe.
     const pa = [0, 0, 0], va = [0, 0, 0], pb = [0, 0, 0];
+    propagateECI(S.fleet[ev.a], ev.tcaMs, pa);
+    propagateECI(S.fleet[ev.b], ev.tcaMs, pb);
+    const mid0 = new THREE.Vector3(
+      (pa[0] + pb[0]) / 2 * SCENE_SCALE,
+      (pa[2] + pb[2]) / 2 * SCENE_SCALE,
+      -(pa[1] + pb[1]) / 2 * SCENE_SCALE
+    );
+    const mag0 = mid0.length() || 1;
+    cam.state.target.copy(mid0);
+    cam.state.az = Math.atan2(mid0.x, mid0.z);
+    cam.state.el = Math.asin(clamp(mid0.y / mag0, -1, 1));
+    cam.state.distance = 1.5;
+
+    // Chase the pair midpoint while the pass plays out.
     cam.setChase(() => {
       propagateECI(S.fleet[ev.a], S.twinTimeMs, pa, va);
       if (S.burn) applyBurnOffset(S.twinTimeMs, pa, va, S.burn);
@@ -1455,7 +1472,6 @@ export function startDigitalTwin(root, opts = {}) {
         -(pa[1] + pb[1]) / 2 * SCENE_SCALE
       );
     });
-    cam.state.distance = Math.min(cam.state.distance, 4.2);
     ui.ctas.predict.disabled = false;
   }
 
